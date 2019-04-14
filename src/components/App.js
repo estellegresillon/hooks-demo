@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import ResourceList from './resource_list'
+import UserList from './user_list'
 
 const App = () => {
 	// resource = current value 
@@ -19,6 +20,7 @@ const App = () => {
 					Todos
 				</button>
 			</div>
+			<UserList resource={resource} />
 			<ResourceList resource={resource} />
 		</div>
 	)

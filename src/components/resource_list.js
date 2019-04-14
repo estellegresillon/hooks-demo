@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
+import useResources from './use_resources'
 
 // class ResourceList extends React.Component {
 // 	state = { resources: [] }
@@ -26,23 +26,15 @@ import axios from 'axios'
 // }
 
 const ResourceList = ({ resource }) => {
-	const [resources, setResources] = useState([])
+	const resources = useResources(resource)
 
-	const fetchResource = async (resource) => {
-		const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`)
-		
-		setResources(response.data)
-	}
-
-	// useEffect combines DidMount and DidUpdate
-	// you can click multiple times in a row on posts or todo,
-	// the request is done once anyway !
-	// ultimately, it prevents from infinites re-renderings...
-	useEffect(() => {
-		fetchResource(resource)
-	}, [resource])
-
-	return <div>{resources.length}</div>
+	return (
+		<ul>
+			{resources.map(record => 
+				<li>{record.title}</li>
+			)}
+		</ul>
+	)
 }
 
 export default ResourceList
